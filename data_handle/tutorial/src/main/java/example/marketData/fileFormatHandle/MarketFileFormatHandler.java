@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class MarketFileFormatHandler {
-    private static String PATH = "/home/javidan/Documents/tutorials/javaTutorials/tutorial/src/";
+    private static final String PATH = "/home/javidan/Documents/tutorials/javaTutorials/tutorial/src/";
     private static List<Market> csvToMarketObject() {
         try {
             return new CsvToBeanBuilder(new FileReader(PATH + "MarketData.csv"))
