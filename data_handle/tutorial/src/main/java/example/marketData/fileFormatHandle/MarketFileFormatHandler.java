@@ -12,10 +12,10 @@ import java.io.IOException;
 import java.util.List;
 
 public class MarketFileFormatHandler {
-
+    private static String PATH = "/home/javidan/Documents/tutorials/javaTutorials/tutorial/src/";
     private static List<Market> csvToMarketObject() {
         try {
-            return new CsvToBeanBuilder(new FileReader("/home/javidan/Documents/tutorials/javaTutorials/tutorial/src/MarketData.csv"))
+            return new CsvToBeanBuilder(new FileReader(PATH + "MarketData.csv"))
                     .withType(Market.class).build().parse();
         } catch (Exception e) {
             e.printStackTrace();
@@ -24,20 +24,16 @@ public class MarketFileFormatHandler {
     }
 
     private static String convertMarketObjectToJSON() {
-        File file = new File("/home/javidan/Documents/tutorials/javaTutorials/tutorial/src/marketProducts.json");
-        String json = null;
-        if (!file.exists()) {
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            json = gson.toJson(csvToMarketObject());
-
-            try (FileWriter fileWriter = new FileWriter(file)) {
-
-                fileWriter.write(json);
-                fileWriter.flush();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        File file = new File(PATH + "marketProducts.json");
+        if (file.exists())
+            return null;
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String json = gson.toJson(csvToMarketObject());
+        try (FileWriter fileWriter = new FileWriter(file)) {
+             fileWriter.write(json);
+             fileWriter.flush();
+        } catch (IOException e) {
+             e.printStackTrace();
         }
         return json;
     }
