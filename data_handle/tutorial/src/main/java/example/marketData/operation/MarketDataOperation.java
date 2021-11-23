@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 public class MarketDataOperation {
 
-
     public List<Map<String, Integer>> getLargeNumberBrandNameOnStock() {
         List<Map<String, Integer>> productNameAndAmountList = new ArrayList<>();
         List<String> brandNames =
